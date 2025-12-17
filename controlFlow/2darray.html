@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2D Array Seating</title>
+    <style>
+        .seating-chart {
+            display: grid;
+            /* Added 'px' units here */
+            grid-template-columns: repeat(3, 80px); 
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .seat {
+            width: 70px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .booked {
+            background-color: red;
+            cursor: not-allowed;
+            color: white;
+        }
+        .available {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="seating-chart" class="seating-chart">
+        <div class="seat available" onclick="bookSeat(0,0)">A1</div>
+        <div class="seat available" onclick="bookSeat(0,1)">A2</div>
+        <div class="seat available" onclick="bookSeat(0,2)">A3</div>
+        <div class="seat available" onclick="bookSeat(1,0)">B1</div>
+        <div class="seat available" onclick="bookSeat(1,1)">B2</div>
+        <div class="seat available" onclick="bookSeat(1,2)">B3</div>
+        <div class="seat available" onclick="bookSeat(2,0)">C1</div>
+        <div class="seat available" onclick="bookSeat(2,1)">C2</div>
+        <div class="seat available" onclick="bookSeat(2,2)">C3</div>
+    </div>
+
+    <button onclick="bookRandomSeat()" style="display: block; margin: 20px auto; padding: 10px;">
+        Book Random Seat
+    </button>
+
+    <script>
+        // 1. Fixed name to match function calls
+        const theaterSeats = [
+            ['X', 'O', 'X'],
+            ['O', 'O', 'O'], // Changed some to 'O' so you can actually click them
+            ['X', 'O', 'X']
+        ];
+
+        function bookSeat(row, col) {
+            if (theaterSeats[row][col] === 'O') {
+                theaterSeats[row][col] = 'X';
+                // 2. Added quotes around 'booked'
+                updateSeatStatus(row, col, 'booked'); 
+                alert(`Seat ${String.fromCharCode(65 + row)}${col + 1} is booked`);
+            } else {
+                alert(`Seat ${String.fromCharCode(65 + row)}${col + 1} is already taken`);
+            }
+        }
+
+        function updateSeatStatus(row, col, status) {
+            // 3. Use querySelectorAll to get the list of seats
+            const seats = document.querySelectorAll('.seat');
+            const index = row * 3 + col;
+            seats[index].classList.remove('available', 'booked');
+            seats[index].classList.add(status);
+        }
+
+        function bookRandomSeat() {
+            const availableSeats = [];
+            for (let row = 0; row < theaterSeats.length; row++) {
+                for (let col = 0; col < theaterSeats[row].length; col++) {
+                    if (theaterSeats[row][col] === 'O') {
+                        availableSeats.push({ row, col });
+                    }
+                }
+            }
+
+            if (availableSeats.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableSeats.length);
+                const { row, col } = availableSeats[randomIndex];
+                bookSeat(row, col);
+            } else {
+                alert('All seats are full!');
+            }
+        }
+    </script>
+</body>
+</html>
