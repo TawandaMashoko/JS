@@ -1,0 +1,165 @@
+/* weather_report.css
+   Clean, modern UI for your Weather Report page
+   (works great with your existing HTML)
+*/
+
+:root{
+  --bg1:#0b1020;
+  --bg2:#121a33;
+
+  --card: rgba(255,255,255,0.08);
+  --card2: rgba(255,255,255,0.12);
+  --stroke: rgba(255,255,255,0.16);
+
+  --text:#e9ecff;
+  --muted: rgba(233,236,255,0.72);
+
+  --shadow: 0 18px 55px rgba(0,0,0,0.45);
+  --radius: 18px;
+}
+
+*{ box-sizing:border-box; }
+
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(900px 450px at 10% 10%, rgba(54, 197, 255, 0.18), transparent 60%),
+    radial-gradient(800px 420px at 90% 15%, rgba(255, 92, 170, 0.16), transparent 60%),
+    radial-gradient(900px 520px at 50% 100%, rgba(125, 255, 158, 0.12), transparent 60%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  display:grid;
+  place-items:center;
+  padding: 28px 16px;
+}
+
+/* A centered “app” panel without changing your HTML */
+body > *{
+  width: min(980px, 100%);
+}
+
+h1{
+  margin: 0 0 16px;
+  font-size: clamp(28px, 3.2vw, 44px);
+  letter-spacing: 0.6px;
+  text-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* Form panel */
+#weatherForm{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 18px;
+  display:flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Label */
+#weatherForm label{
+  display:block;
+  width: 100%;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* Input */
+#city{
+  flex: 1 1 260px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.18);
+  color: var(--text);
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+#city::placeholder{
+  color: rgba(233,236,255,0.55);
+}
+
+#city:focus{
+  border-color: rgba(255,255,255,0.30);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10), 0 0 0 4px rgba(54,197,255,0.12);
+}
+
+/* Button */
+#weatherForm button{
+  height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  cursor:pointer;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #0b1020;
+  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.78));
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+
+#weatherForm button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+}
+
+#weatherForm button:active{
+  transform: translateY(0);
+}
+
+#weatherForm button:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform:none;
+}
+
+/* Results area */
+#weatherInfo{
+  margin-top: 16px;
+  background: var(--card2);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  min-height: 88px;
+}
+
+/* If you inject headings/paragraphs via JS, they’ll look great */
+#weatherInfo h2{
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+#weatherInfo p{
+  margin: 6px 0;
+  color: rgba(233,236,255,0.88);
+  line-height: 1.5;
+}
+
+/* Optional: make “error” messages obvious if you output a <p> only */
+#weatherInfo p:only-child{
+  color: rgba(255, 196, 196, 0.95);
+}
+
+/* Small screens */
+@media (max-width: 520px){
+  #weatherForm{
+    padding: 14px;
+  }
+  #weatherInfo{
+    padding: 14px;
+  }
+}
